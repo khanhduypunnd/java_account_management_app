@@ -13,6 +13,16 @@
         android:theme="@style/Theme.Mid_term_Mobile"
         tools:targetApi="31">
         <activity
+            android:name=".activity_main_system"
+            android:exported="false" />
+        <activity
+            android:name=".activity_register"
+            android:exported="false" />
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:exported="false"
+            android:label="@string/title_activity_login" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

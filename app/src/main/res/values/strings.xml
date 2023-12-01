@@ -1,3 +1,20 @@
 <resources>
+    <string name="home_export">Export students</string>
+    <string name="home_import">Import students</string>
+    <string name="home_add_student">Add new student</string>
+    <string name="home_list_students">List of Students</string>
+    <string name="home_add_user">Add new user</string>
+    <string name="home_list">List of System Users</string>
+    <string name="name_home">User</string>
+    <string name="register_name">Full name</string>
+    <string name="register_number">Phone number</string>
+    <string name="register_passwork">Passwork</string>
     <string name="app_name">Mid_term_Mobile</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome!"</string>
+    <string name="lbl_full_name">Full Name</string>
 </resources>
