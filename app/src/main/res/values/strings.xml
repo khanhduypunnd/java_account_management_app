@@ -1,4 +1,5 @@
 <resources>
+    <string name="home_logout">Log out</string>
     <string name="home_export">Export students</string>
     <string name="home_import">Import students</string>
     <string name="home_add_student">Add new student</string>
