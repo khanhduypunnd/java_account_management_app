@@ -18,4 +18,15 @@
     <string name="action_sign_in_short">Sign in</string>
     <string name="welcome">"Welcome!"</string>
     <string name="lbl_full_name">Full Name</string>
+    <string name="save">Save</string>
+    <string name="age">Age</string>
+    <string name="phone">Phone number</string>
+    <string name="status">Status</string>
+    <string name="status_normal">Normal</string>
+    <string name="status_locked">Locked</string>
+    <string name="st_class">Class</string>
+    <string name="st_email">Email</string>
+    <string name="login">Sign in</string>
+    <string name="dont_acc">Not an account?</string>
+    <string name="sign_up">Sign up</string>
 </resources>
