@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".user_profile"
-    android:orientation="vertical"
-    android:padding="15dp">
-
+    tools:context=".edit_user_layout"
+    android:padding="15dp"
+    android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearProfileDetails"
@@ -15,7 +14,8 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
-        android:background="@drawable/blued_radius">
+        android:background="@drawable/blued_radius"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -38,9 +38,11 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
+        android:id="@+id/l1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/linearProfileDetails">
 
         <TextView
             android:layout_marginTop="20dp"
@@ -55,30 +57,6 @@
             android:layout_height="wrap_content"
             android:hint="@string/lbl_full_name"
             android:textSize="20dp"/>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="8dip">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginTop="16dip"
-                android:text="@string/age"
-                android:textSize="20dp"/>
-
-            <NumberPicker
-                android:id="@+id/txt_age"
-                android:layout_width="87dp"
-                android:layout_height="70dp"/>
-
-
-        </LinearLayout>
-
 
         <TextView
             android:layout_width="match_parent"
@@ -109,53 +87,17 @@
             android:hint="@string/st_email"
             android:inputType="number"
             android:textSize="20dp"/>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="8dip">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="8dip"
-                android:layout_marginTop="10sp"
-                android:textSize="20dp"
-                android:text="Role">
-            </TextView>
-
-            <RadioGroup
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/radio_manager"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="15dip"
-                    android:textSize="18sp"
-                    android:text="Manager">
-                </RadioButton>
-                <RadioButton
-                    android:id="@+id/radio_employee"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:text="Employee">
-                </RadioButton>
-            </RadioGroup>
-        </LinearLayout>
     </LinearLayout>
 
 
     <LinearLayout
+        android:id="@+id/l2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:orientation="horizontal"
-        android:layout_marginTop="8dip">
+        android:layout_marginTop="8dip"
+        app:layout_constraintTop_toBottomOf="@+id/l1">
 
         <TextView
             android:layout_width="wrap_content"
@@ -199,6 +141,10 @@
         android:onClick="saveStudent"
         android:text="@string/save"
         android:textColor="@color/white"
-        android:textSize="15dp"/>
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/l2"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="31dp" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

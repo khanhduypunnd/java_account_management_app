@@ -35,7 +35,8 @@
             android:textSize="20dp"
             android:layout_marginTop="50dp"/>
 
-        <TextView android:ellipsize="end" android:id="@+id/txtSuptitle"
+        <TextView android:ellipsize="end"
+            android:id="@+id/txtSuptitle"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
@@ -45,10 +46,10 @@
             android:textSize="20dp"/>
 
         <EditText
-            android:id="@+id/etPhonenumber"
+            android:id="@+id/login_email"
             android:background="@drawable/blued_gray_radius_10"
             android:ellipsize="end"
-            android:hint="@string/phone"
+            android:hint="Email"
             android:inputType="text"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
@@ -66,7 +67,7 @@
             android:layout_marginTop="50dp"/>
 
         <EditText
-            android:id="@+id/etPassword"
+            android:id="@+id/login_password"
             android:background="@drawable/blued_gray_radius_10"
             android:ellipsize="end"
             android:hint="@string/prompt_password"
@@ -96,19 +97,16 @@
             android:layout_width="match_parent"
             android:letterSpacing="0.01"
             android:singleLine="true"
-            android:text="@string/action_sign_in"
+            android:text="Sign in"
             android:textAllCaps="false"
             android:textColor="@color/gray_50"
             android:textFontWeight="700"
             android:textSize="20dp"
             android:textStyle="bold"
-            tools:text="@string/login"
             android:layout_marginTop="20dp"/>
 
 
     </LinearLayout>
-
-
 
 
     <LinearLayout

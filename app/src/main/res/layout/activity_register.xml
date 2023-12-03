@@ -89,7 +89,7 @@
             android:id="@+id/regis_Password"
             android:background="@drawable/blued_gray_radius_10"
             android:ellipsize="end"
-            android:hint="@string/register_passwork"
+            android:hint="@string/register_password"
             android:inputType="numberPassword"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
@@ -116,13 +116,13 @@
             android:layout_width="match_parent"
             android:letterSpacing="0.01"
             android:singleLine="true"
-            android:text="@string/lbl_sign_in"
+            android:text="@string/register"
             android:textAllCaps="false"
             android:textColor="@color/gray_50"
             android:textFontWeight="700"
             android:textSize="20dp"
             android:textStyle="bold"
-            tools:text="@string/lbl_sign_in"
+            tools:text="@string/register"
             android:layout_marginTop="20dp"/>
 
 
@@ -136,12 +136,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:orientation="horizontal"
-        android:layout_gravity="center_vertical">
+        android:layout_gravity="end">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/msg_you_already_hav2"
+            android:text="Already has an account?"
             android:gravity="center_vertical"
             android:letterSpacing="0.02"
             android:singleLine="true"
@@ -154,13 +154,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:ellipsize="end"
-            android:gravity="end"
             android:letterSpacing="0.01"
             android:singleLine="true"
-            android:text="@string/lbl_sign_up"
+            android:text="Sign in"
             android:textColor="#2199F8"
             android:textSize="20dp"
-            tools:text="@string/lbl_sign_in" />
+            android:layout_marginLeft="5dp"/>
     </LinearLayout>
 
 </LinearLayout>

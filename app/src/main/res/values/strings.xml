@@ -9,7 +9,7 @@
     <string name="name_home">User</string>
     <string name="register_name">Full name</string>
     <string name="register_number">Phone number</string>
-    <string name="register_passwork">Passwork</string>
+    <string name="register_password">Password</string>
     <string name="app_name">Mid_term_Mobile</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
@@ -29,4 +29,5 @@
     <string name="login">Sign in</string>
     <string name="dont_acc">Not an account?</string>
     <string name="sign_up">Sign up</string>
+    <string name="register">Register</string>
 </resources>
