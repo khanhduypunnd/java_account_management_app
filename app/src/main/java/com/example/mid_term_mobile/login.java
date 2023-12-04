@@ -25,16 +25,15 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
 public class login extends AppCompatActivity {
 
     private EditText mail, pass;
     private AppCompatButton signin;
-    private DataCallback loginCallback;
 
-    public login(DataCallback loginCallback) {
-        this.loginCallback = loginCallback;
-    }
-
+    private FirebaseDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,41 +45,8 @@ public class login extends AppCompatActivity {
         signin = findViewById(R.id.btnSignIn);
 
 
-        login loginActivity = new login(new DataCallback() {
-            @Override
-            public void onSuccess(User user) {
-                // Xử lý khi đăng nhập thành công
-                Toast.makeText(login.this, "Success", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(login.this, MainActivity.class);
-                intent.putExtra("email", user.getMail());
-                intent.putExtra("name", user.getName());
-                intent.putExtra("role", user.getRole());
-                startActivityForResult(intent, 100);
-            }
 
-            @Override
-            public void onWrongPassword() {
-                // Xử lý khi mật khẩu sai
-                Toast.makeText(login.this, "Wrong password", Toast.LENGTH_SHORT).show();
-                pass.setText("");
-                pass.requestFocus();
-            }
-
-            @Override
-            public void onUserNotFound() {
-                // Xử lý khi người dùng không được tìm thấy
-                Toast.makeText(login.this, "User not found", Toast.LENGTH_SHORT).show();
-                mail.setText("");
-                pass.setText("");
-                mail.requestFocus();
-            }
-
-            @Override
-            public void onError(DatabaseError error) {
-                // Xử lý khi có lỗi xảy ra trong database
-            }
-        });
-
+        database = FirebaseDatabase.getInstance();
 
 
         signin.setOnClickListener(new View.OnClickListener() {
@@ -99,40 +65,67 @@ public class login extends AppCompatActivity {
                 } else if (!email.contains("@")){
                     Toast.makeText(login.this, "Please enter a valid email", Toast.LENGTH_SHORT).show();
                     mail.requestFocus();
+                }else{
+                    connectToFirebase(email,password);
                 }
 
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference usersRef = database.getReference("user");
-                Query query = usersRef.orderByChild("email").equalTo(email);
 
-                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                //Executor executor = Executors.newFixedThreadPool(3);
+
+                /*executor.execute(new Runnable() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(snapshot.exists()){
-                            for(DataSnapshot snap : snapshot.getChildren()){
-                                User user = snap.getValue(User.class);
-                                if(user.getPass().toString().equals(password)){
-                                    loginCallback.onSuccess(user);
-                                }
-                                else{
-                                    loginCallback.onWrongPassword();
-                                }
-                            }
-                        }
-                        else {
-                            loginCallback.onUserNotFound();
-                        };
+                    public void run() {
+                        connectToFirebase(email,password);
                     }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        loginCallback.onError(error);
-                    }
-                });
-
+                });*/
+                //executor.notifyAll();
             }
         });
     }
 
+    private void connectToFirebase(String email,String password)
+    {
+
+        DatabaseReference usersRef = database.getReference("user");
+        Query query = usersRef.orderByChild("mail").equalTo(email);
+
+
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    for(DataSnapshot snap : snapshot.getChildren()){
+                        User user = snap.getValue(User.class);
+                        if(user.getPass().toString().equals(password)){
+                            Toast.makeText(login.this, "Success", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(login.this, activity_main_system.class);
+                            intent.putExtra("email", user.getMail());
+                            intent.putExtra("name", user.getName());
+                            intent.putExtra("role", user.getRole());
+                            startActivity(intent);
+                            //startActivityForResult(intent, 100);
+                        }
+                        else{
+                            Toast.makeText(login.this, "Wrong password", Toast.LENGTH_SHORT).show();
+                            pass.setText("");
+                            pass.requestFocus();
+                        }
+                    }
+                }
+                else {
+                    Toast.makeText(login.this, "User not found", Toast.LENGTH_SHORT).show();
+                    mail.setText("");
+                    pass.setText("");
+                    mail.requestFocus();
+                };
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 
 }

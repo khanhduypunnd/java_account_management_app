@@ -4,6 +4,7 @@ public class User {
     private String avatar, name, mail, pass;
     private int age, role, phone;
     private boolean status;
+    public User(){};
 
     public User(String avatar, String name, String mail, String pass, int age, int role, int phone, boolean status) {
         this.avatar = avatar;
