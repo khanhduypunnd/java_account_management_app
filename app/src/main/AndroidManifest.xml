@@ -28,7 +28,7 @@
             android:name=".user_profile"
             android:exported="true" />
         <activity
-            android:name=".activity_main_system"
+            android:name=".home"
             android:exported="true" />
         <activity
             android:name=".activity_register"

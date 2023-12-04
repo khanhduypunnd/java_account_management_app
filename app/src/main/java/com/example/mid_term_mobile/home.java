@@ -1,11 +1,5 @@
 package com.example.mid_term_mobile;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
-
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,36 +7,30 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.TaskCompletionSource;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
-import org.checkerframework.checker.units.qual.A;
-
-import java.io.FileInputStream;
-import java.net.URL;
-import java.time.Instant;
-
-public class activity_main_system extends AppCompatActivity {
+public class home extends AppCompatActivity {
 
     private ImageView avatar;
     private TextView name;
@@ -53,18 +41,26 @@ public class activity_main_system extends AppCompatActivity {
     private Uri link_avatar;
 
     private FirebaseDatabase database;
+    private StorageReference storage_avatar;
+
+    private String key;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_system);
+        setContentView(R.layout.activity_home);
 
         initView();
 
         Intent intent = getIntent();
+        key = intent.getStringExtra("key");
+
         name.setText(intent.getStringExtra("name"));
         int role = intent.getIntExtra("role", 0);
+
+
+        getAvatar(intent.getStringExtra("email"), avatar);
 
         if(role == 0){
             listUser.setVisibility(View.VISIBLE);
@@ -78,11 +74,13 @@ public class activity_main_system extends AppCompatActivity {
             btnExport.setVisibility(View.VISIBLE);
         }
 
+
+
         avatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder;
-                builder = new AlertDialog.Builder(activity_main_system.this);
+                builder = new AlertDialog.Builder(home.this);
                 builder.setTitle("Picture");
 
                 final CharSequence[] items = {"Gallery"};
@@ -103,6 +101,21 @@ public class activity_main_system extends AppCompatActivity {
             }
         });
 
+        logout_function(logout);
+
+    }
+
+    private void logout_function(AppCompatButton logout) {
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(home.this, login.class);
+
+                startActivity(intent);
+
+                finish();
+            }
+        });
     }
 
     @Override
@@ -112,9 +125,43 @@ public class activity_main_system extends AppCompatActivity {
         if(requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.getData() != null){
             link_avatar = data.getData();
 
+            //upload avatar to firebase
+            upload_firebase(link_avatar);
 
             avatar.setImageURI(link_avatar);
         }
+    }
+
+    private void upload_firebase(Uri linkAvatar) {
+        StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+        StorageReference avatarRef = storageRef.child("avatars/" + key);
+
+        FirebaseDatabase database1 = FirebaseDatabase.getInstance();
+
+        DatabaseReference usersRef = database1.getReference("user");
+
+
+        avatarRef.putFile(link_avatar).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                avatarRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        String url = uri.toString();
+                        usersRef.child(key + "/avatar").setValue(url);
+                        Toast.makeText(home.this, "Update successfully", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+
+
+
     }
 
 
@@ -135,5 +182,32 @@ public class activity_main_system extends AppCompatActivity {
         addStudent.setVisibility(View.GONE);
         btnImport.setVisibility(View.GONE);
         btnExport.setVisibility(View.GONE);
+    }
+
+
+    private void getAvatar(String email, ImageView avatar) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference usersRef = database.getReference("user");
+        Query query = usersRef.orderByChild("mail").equalTo(email);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                        User user = userSnapshot.getValue(User.class);
+                        if(user.getAvatar().isEmpty()){
+                            user.setAvatar("https://firebasestorage.googleapis.com/v0/b/mid-term-mobile.appspot.com/o/avatars%2FUS3?alt=media&token=6dedf4b5-8362-4ad3-bf40-9e69e8cf1cbe");
+                        }
+                        Picasso.get()
+                                .load(user.getAvatar())
+                                .into(avatar);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
     }
 }

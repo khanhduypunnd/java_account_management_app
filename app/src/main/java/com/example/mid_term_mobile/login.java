@@ -11,22 +11,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 
 public class login extends AppCompatActivity {
 
@@ -90,7 +81,6 @@ public class login extends AppCompatActivity {
         Query query = usersRef.orderByChild("mail").equalTo(email);
 
 
-
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -99,7 +89,9 @@ public class login extends AppCompatActivity {
                         User user = snap.getValue(User.class);
                         if(user.getPass().toString().equals(password)){
                             Toast.makeText(login.this, "Success", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(login.this, activity_main_system.class);
+                            Intent intent = new Intent(login.this, home.class);
+                            String key = snap.getKey();
+                            intent.putExtra("key", key);
                             intent.putExtra("email", user.getMail());
                             intent.putExtra("name", user.getName());
                             intent.putExtra("role", user.getRole());

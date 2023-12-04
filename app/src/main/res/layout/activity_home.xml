@@ -31,7 +31,7 @@
             android:singleLine="true"
             android:text="@string/name_home"
             tools:text="@string/name_home"
-            android:textSize="40dp"/>
+            android:textSize="20dp"/>
 
     </LinearLayout>
 
