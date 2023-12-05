@@ -79,6 +79,7 @@ public class login extends AppCompatActivity {
 
         DatabaseReference usersRef = database.getReference("user");
         Query query = usersRef.orderByChild("mail").equalTo(email);
+        Query query1 = usersRef.orderByChild("status");
 
 
         query.addListenerForSingleValueEvent(new ValueEventListener() {

@@ -18,14 +18,15 @@
         android:background="@drawable/blued_radius">
 
         <ImageButton
+            android:id="@+id/userAdd_btnBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:src="@drawable/back_button"
             tools:ignore="MissingConstraints" />
 
-        <ImageView
-            android:id="@+id/img_profile"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/userAdd_avatar"
             android:layout_width="135dp"
             android:layout_height="158dp"
             android:scaleType="centerCrop"
@@ -60,7 +61,7 @@
                     android:textSize="20dp"/>
 
                 <EditText
-                    android:id="@+id/txtName"
+                    android:id="@+id/userAdd_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/lbl_full_name"
@@ -82,7 +83,7 @@
                         android:textSize="20dp"/>
 
                     <NumberPicker
-                        android:id="@+id/txt_age"
+                        android:id="@+id/userAdd_age"
                         android:layout_width="87dp"
                         android:layout_height="70dp"/>
 
@@ -98,7 +99,7 @@
                     android:textSize="20dp"/>
 
                 <EditText
-                    android:id="@+id/txt_phone"
+                    android:id="@+id/userAdd_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/phone"
@@ -113,11 +114,11 @@
                     android:textSize="20dp"/>
 
                 <EditText
-                    android:id="@+id/txt_mail"
+                    android:id="@+id/userAdd_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/st_email"
-                    android:inputType="number"
+                    android:inputType="textEmailAddress"
                     android:textSize="20dp"/>
 
 
@@ -129,7 +130,7 @@
                     android:textSize="20dp"/>
 
                 <EditText
-                    android:id="@+id/txt_pass"
+                    android:id="@+id/userAdd_pass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Password"
@@ -153,12 +154,13 @@
                     </TextView>
 
                     <RadioGroup
+                        android:id="@+id/userAdd_radioGroup1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
                         <RadioButton
-                            android:id="@+id/radio_manager"
+                            android:id="@+id/userAdd_manager"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="15dip"
@@ -166,7 +168,7 @@
                             android:text="Manager">
                         </RadioButton>
                         <RadioButton
-                            android:id="@+id/radio_employee"
+                            android:id="@+id/userAdd_employee"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="18sp"
@@ -193,13 +195,13 @@
                 </TextView>
 
                 <RadioGroup
-                    android:id="@+id/rdButtonGender"
+                    android:id="@+id/userAdd_radioGroup2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
                     <RadioButton
-                        android:id="@+id/radio_normal"
+                        android:id="@+id/userAdd_normal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="15dip"
@@ -207,7 +209,7 @@
                         android:text="@string/status_normal">
                     </RadioButton>
                     <RadioButton
-                        android:id="@+id/radio_locked"
+                        android:id="@+id/userAdd_locked"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="18sp"
@@ -222,7 +224,7 @@
 
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnSave"
+        android:id="@+id/userAdd_save"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dip"

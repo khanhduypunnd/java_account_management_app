@@ -57,23 +57,27 @@ public class home extends AppCompatActivity {
         key = intent.getStringExtra("key");
 
         name.setText(intent.getStringExtra("name"));
-        int role = intent.getIntExtra("role", 0);
+        String role = intent.getStringExtra("role");
 
 
         getAvatar(intent.getStringExtra("email"), avatar);
 
-        if(role == 0){
+        if(role.equals("admin")){
             listUser.setVisibility(View.VISIBLE);
             addUser.setVisibility(View.VISIBLE);
             addStudent.setVisibility(View.VISIBLE);
             btnImport.setVisibility(View.VISIBLE);
             btnExport.setVisibility(View.VISIBLE);
-        } else if (role == 1) {
+
+        } else if (role.equals("manager")) {
             addStudent.setVisibility(View.VISIBLE);
             btnImport.setVisibility(View.VISIBLE);
             btnExport.setVisibility(View.VISIBLE);
         }
 
+
+
+        click_event();
 
 
         avatar.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +106,80 @@ public class home extends AppCompatActivity {
         });
 
         logout_function(logout);
+
+    }
+
+    private void initView() {
+        avatar = findViewById(R.id.img_profile);
+        name = findViewById(R.id.txt_name_home);
+        listUser = findViewById(R.id.home_listUsers);
+        addUser = findViewById(R.id.home_addnewUser);
+        listStudent = findViewById(R.id.home_ListStudents);
+        addStudent = findViewById(R.id.home_add_student);
+        btnImport = findViewById(R.id.home_import);
+        btnExport = findViewById(R.id.home_export);
+        logout = findViewById(R.id.home_logout);
+
+
+        listUser.setVisibility(View.GONE);
+        addUser.setVisibility(View.GONE);
+        addStudent.setVisibility(View.GONE);
+        btnImport.setVisibility(View.GONE);
+        btnExport.setVisibility(View.GONE);
+    }
+
+    private void click_event() {
+
+        listUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(home.this, list_user.class);
+                startActivity(intent);
+            }
+        });
+
+        addUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(home.this, user_profile.class);
+                startActivity(intent);
+            }
+        });
+
+        listStudent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(home.this, list_students_view.class);
+                startActivity(intent);
+
+            }
+        });
+
+
+        addStudent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(home.this, student_profile.class);
+                startActivity(intent);
+
+            }
+        });
+
+
+        btnImport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
+        btnExport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
     }
 
@@ -160,29 +238,8 @@ public class home extends AppCompatActivity {
             }
         });
 
-
-
     }
 
-
-    private void initView() {
-        avatar = findViewById(R.id.img_profile);
-        name = findViewById(R.id.txt_name_home);
-        listUser = findViewById(R.id.home_listUsers);
-        addUser = findViewById(R.id.home_addnewUser);
-        listStudent = findViewById(R.id.home_ListStudents);
-        addStudent = findViewById(R.id.home_add_student);
-        btnImport = findViewById(R.id.home_import);
-        btnExport = findViewById(R.id.home_export);
-        logout = findViewById(R.id.home_logout);
-
-
-        listUser.setVisibility(View.GONE);
-        addUser.setVisibility(View.GONE);
-        addStudent.setVisibility(View.GONE);
-        btnImport.setVisibility(View.GONE);
-        btnExport.setVisibility(View.GONE);
-    }
 
 
     private void getAvatar(String email, ImageView avatar) {
@@ -196,7 +253,7 @@ public class home extends AppCompatActivity {
                     for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                         User user = userSnapshot.getValue(User.class);
                         if(user.getAvatar().isEmpty()){
-                            user.setAvatar("https://firebasestorage.googleapis.com/v0/b/mid-term-mobile.appspot.com/o/avatars%2FUS3?alt=media&token=6dedf4b5-8362-4ad3-bf40-9e69e8cf1cbe");
+                            user.setAvatar("https://firebasestorage.googleapis.com/v0/b/mid-term-mobile.appspot.com/o/avatars%2Fnull?alt=media&token=c1762122-4618-429e-8f10-b8004b33aaa5");
                         }
                         Picasso.get()
                                 .load(user.getAvatar())
