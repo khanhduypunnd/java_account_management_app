@@ -1,11 +1,14 @@
 package com.example.mid_term_mobile;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,6 +19,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.content.FileProvider;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -29,6 +33,19 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
+
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import java.io.Console;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class home extends AppCompatActivity {
 
@@ -177,11 +194,96 @@ public class home extends AppCompatActivity {
         btnExport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //write_file();
+                export_file();
             }
+
+
         });
 
     }
+
+    private void export_file() {
+        DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("student");
+
+        databaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
+
+            File file = new File(getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), "exported_data.xlsx");
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Step 2: Export data to Excel (XLSX) file
+                try {
+                    Workbook  workbook = new XSSFWorkbook();
+                    Sheet sheet = workbook.createSheet("Data");
+
+                    int rowNum = 0;
+
+                    Row header = sheet.createRow(0);
+                    header.createCell(0).setCellValue("name");
+                    header.createCell(1).setCellValue("age");
+                    header.createCell(2).setCellValue("st_class");
+                    header.createCell(3).setCellValue("phone");
+                    header.createCell(4).setCellValue("email");
+
+                    //rowNum+=1;
+
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        // Assuming each child represents a row in your Excel file
+                        Row row = sheet.createRow(rowNum++);
+
+
+
+                        String name = snapshot.child("name").getValue(String.class);
+                        String age = snapshot.child("age").getValue(String.class);
+                        String st_class = snapshot.child("st_class").getValue(String.class);
+                        String phone = snapshot.child("phone").getValue(String.class);
+                        String email = snapshot.child("email").getValue(String.class);
+
+                        Log.e("name",name);
+                        Log.e("age",age);
+                        Log.e("st_class",st_class);
+                        Log.e("phone",phone);
+                        Log.e("email",email);
+
+
+                        row.createCell(0).setCellValue(name);
+                        row.createCell(1).setCellValue(age);
+                        row.createCell(2).setCellValue(st_class);
+                        row.createCell(3).setCellValue(phone);
+                        row.createCell(4).setCellValue(email);
+
+
+                    }
+
+                    // Step 3: Save the Excel file to device's storage
+                    //File file = new File(getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), "exported_data.xlsx");
+                    FileOutputStream fileOut = new FileOutputStream(file);
+                    workbook.write(fileOut);
+                    fileOut.close();
+
+
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Handle errors
+            }
+        });
+    }
+
+    private void write_file(){
+        Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        intent.putExtra(Intent.EXTRA_TITLE, "list_export_students.xlsx");
+        startActivityForResult(intent, 2);
+    }
+
 
     private void logout_function(AppCompatButton logout) {
         logout.setOnClickListener(new View.OnClickListener() {
@@ -207,7 +309,17 @@ public class home extends AppCompatActivity {
             upload_firebase(link_avatar);
 
             avatar.setImageURI(link_avatar);
-        }
+        } /*else if (requestCode == 2 && resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
+            Uri uri = data.getData();
+            getStudents(new StudentListCallback() {
+                @Override
+                public void onCallback(List<Student> students) {
+                    exportToExcel(uri, students);
+                }
+            });
+        }*/
+
+
     }
 
     private void upload_firebase(Uri linkAvatar) {

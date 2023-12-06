@@ -19,13 +19,14 @@
 
 
         <ImageButton
+            android:id="@+id/addStudent_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:src="@drawable/back_button"/>
+            android:src="@drawable/back_button" />
 
-        <ImageView
-            android:id="@+id/img_profile"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/addStudent_avatar"
             android:layout_width="135dp"
             android:layout_height="158dp"
             android:scaleType="centerCrop"
@@ -49,34 +50,27 @@
             android:textSize="20dp"/>
 
         <EditText
-            android:id="@+id/txtName"
+            android:id="@+id/addStudent_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/lbl_full_name"
             android:textSize="20dp"/>
 
 
-        <LinearLayout
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="8dip">
+            android:layout_marginTop="16dip"
+            android:text="Date of birth"
+            android:textSize="20dp"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginTop="16dip"
-                android:text="@string/age"
-                android:textSize="20dp"/>
+        <EditText
+            android:id="@+id/addStudent_age"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Day of birth"
+            android:textSize="20sp"/>
 
-            <CalendarView
-                android:id="@+id/txt_age"
-                android:layout_width="307dp"
-                android:layout_height="70dp"/>
-
-
-        </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
@@ -86,7 +80,7 @@
             android:textSize="20dp"/>
 
         <EditText
-            android:id="@+id/txt_phone"
+            android:id="@+id/addStudent_class"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/st_class"
@@ -102,7 +96,7 @@
             android:textSize="20dp"/>
 
         <EditText
-            android:id="@+id/txt_email"
+            android:id="@+id/addStudent_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/st_email"
@@ -117,7 +111,7 @@
             android:textSize="20dp"/>
 
         <EditText
-            android:id="@+id/txt_phonenumber"
+            android:id="@+id/addStudent_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Phone number"
@@ -127,7 +121,7 @@
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnSave"
+        android:id="@+id/addStudent_save"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dip"
