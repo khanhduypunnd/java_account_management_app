@@ -168,7 +168,6 @@ public class home extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(home.this, list_students_view.class);
                 startActivity(intent);
-
             }
         });
 
@@ -240,11 +239,11 @@ public class home extends AppCompatActivity {
                         String phone = snapshot.child("phone").getValue(String.class);
                         String email = snapshot.child("email").getValue(String.class);
 
-                        Log.e("name",name);
-                        Log.e("age",age);
-                        Log.e("st_class",st_class);
-                        Log.e("phone",phone);
-                        Log.e("email",email);
+                        //Log.e("name",name);
+                        //Log.e("age",age);
+                        //Log.e("st_class",st_class);
+                        //Log.e("phone",phone);
+                        //Log.e("email",email);
 
 
                         row.createCell(0).setCellValue(name);

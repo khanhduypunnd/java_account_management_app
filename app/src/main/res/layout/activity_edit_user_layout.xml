@@ -17,15 +17,9 @@
         android:background="@drawable/blued_radius"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:src="@drawable/back_button"
-            tools:ignore="MissingConstraints" />
 
-        <ImageView
-            android:id="@+id/img_profile"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/editUser_avatar"
             android:layout_width="135dp"
             android:layout_height="158dp"
             android:scaleType="centerCrop"
@@ -51,8 +45,8 @@
             android:text="@string/lbl_full_name"
             android:textSize="20dp"/>
 
-        <EditText
-            android:id="@+id/txtName"
+        <TextView
+            android:id="@+id/editUser_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/lbl_full_name"
@@ -66,7 +60,7 @@
             android:textSize="20dp"/>
 
         <EditText
-            android:id="@+id/txt_phone"
+            android:id="@+id/editUser_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/phone"
@@ -80,11 +74,27 @@
             android:text="@string/st_email"
             android:textSize="20dp"/>
 
-        <EditText
-            android:id="@+id/txt_mail"
+        <TextView
+            android:id="@+id/editUser_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/st_email"
+            android:inputType="number"
+            android:textSize="20dp"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dip"
+            android:text="Password"
+            android:textSize="20dp"/>
+
+        <EditText
+            android:id="@+id/editUser_pass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
             android:inputType="number"
             android:textSize="20dp"/>
     </LinearLayout>
@@ -109,13 +119,13 @@
         </TextView>
 
         <RadioGroup
-            android:id="@+id/rdButtonGender"
+            android:id="@+id/editUser_role"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/radio_normal"
+                android:id="@+id/editUser_normal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="15dip"
@@ -123,7 +133,7 @@
                 android:text="@string/status_normal">
             </RadioButton>
             <RadioButton
-                android:id="@+id/radio_locked"
+                android:id="@+id/editUser_locked"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
@@ -132,19 +142,21 @@
         </RadioGroup>
     </LinearLayout>
 
+
+
+
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnSave"
+        android:id="@+id/editUser_save"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dip"
         android:background="@drawable/blued_radius_10"
         android:onClick="saveStudent"
-        android:text="@string/save"
+        android:text="Save"
         android:textColor="@color/white"
         android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/l2"
         app:layout_constraintVertical_bias="1.0"
-        tools:layout_editor_absoluteX="31dp" />
+        tools:layout_editor_absoluteX="31dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

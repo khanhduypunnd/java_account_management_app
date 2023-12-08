@@ -16,15 +16,8 @@
         android:orientation="vertical"
         android:background="@drawable/blued_radius">
 
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:src="@drawable/back_button"/>
-
-        <ImageView
-            android:id="@+id/img_profile"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/editStudent_avatar"
             android:layout_width="135dp"
             android:layout_height="158dp"
             android:scaleType="centerCrop"
@@ -47,36 +40,27 @@
             android:text="@string/lbl_full_name"
             android:textSize="20dp"/>
 
-        <EditText
-            android:id="@+id/txtName"
+        <TextView
+            android:id="@+id/editStudent_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/lbl_full_name"
             android:textSize="20dp"/>
 
 
-        <LinearLayout
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="8dip">
+            android:layout_marginTop="16dip"
+            android:text="Date of birth"
+            android:textSize="20dp"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginTop="16dip"
-                android:text="@string/age"
-                android:textSize="20dp"/>
-
-            <CalendarView
-                android:id="@+id/txt_age"
-                android:layout_width="307dp"
-                android:layout_height="70dp"/>
-
-
-        </LinearLayout>
-
+        <TextView
+            android:id="@+id/editStudent_dob"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Day of birth"
+            android:textSize="20sp"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -84,8 +68,8 @@
             android:text="@string/st_class"
             android:textSize="20dp"/>
 
-        <EditText
-            android:id="@+id/txt_phone"
+        <TextView
+            android:id="@+id/editStudent_class"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/st_class"
@@ -100,8 +84,8 @@
             android:text="@string/st_email"
             android:textSize="20dp"/>
 
-        <EditText
-            android:id="@+id/txt_email"
+        <TextView
+            android:id="@+id/editStudent_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/st_email"
@@ -116,7 +100,7 @@
             android:textSize="20dp"/>
 
         <EditText
-            android:id="@+id/txt_phonenumber"
+            android:id="@+id/editStudent_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Phone number"
@@ -126,7 +110,7 @@
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnSave"
+        android:id="@+id/editStudent_save"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dip"

@@ -1,7 +1,7 @@
 package com.example.mid_term_mobile;
 
 public class User {
-    private String avatar, name, mail, pass, role, status, phone;
+    private String avatar, name, mail, pass, role, status, phone, userID;
     private int age;
     public User(){};
 
@@ -16,6 +16,17 @@ public class User {
         this.phone = phone;
     }
 
+    public User(String avatar, String name, String mail, String pass, String role, String status, String phone, String userID, int age) {
+        this.avatar = avatar;
+        this.name = name;
+        this.mail = mail;
+        this.pass = pass;
+        this.role = role;
+        this.status = status;
+        this.phone = phone;
+        this.userID = userID;
+        this.age = age;
+    }
 
 
     public String getAvatar() {
@@ -81,5 +92,13 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 }

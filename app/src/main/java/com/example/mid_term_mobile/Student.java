@@ -1,7 +1,28 @@
 package com.example.mid_term_mobile;
 
 public class Student {
-    private String age, avatar, st_class, email, name, phone;
+    private String studentID,age, avatar, st_class, email, name, phone;
+
+    public Student(){};
+    public Student( String age, String avatar, String st_class, String email, String name, String phone) {
+        this.age = age;
+        this.avatar = avatar;
+        this.st_class = st_class;
+        this.email = email;
+        this.name = name;
+        this.phone = phone;
+    }
+    public Student(String studentID, String age, String avatar, String st_class, String email, String name, String phone) {
+        this.studentID = studentID;
+        this.age = age;
+        this.avatar = avatar;
+        this.st_class = st_class;
+        this.email = email;
+        this.name = name;
+        this.phone = phone;
+    }
+
+
 
 
     public String getAge() {
@@ -52,12 +73,12 @@ public class Student {
         this.phone = phone;
     }
 
-    public Student(String age, String avatar, String st_class, String email, String name, String phone) {
-        this.age = age;
-        this.avatar = avatar;
-        this.st_class = st_class;
-        this.email = email;
-        this.name = name;
-        this.phone = phone;
+
+    public String getStudentID() {
+        return studentID;
+    }
+
+    public void setStudentID(String studentID) {
+        this.studentID = studentID;
     }
 }

@@ -44,7 +44,7 @@ public class user_profile extends AppCompatActivity {
     private RadioGroup group1, group2;
     private AppCompatButton save;
 
-    private static final int PICK_IMAGE_REQUEST = 1;
+    static final int PICK_IMAGE_REQUEST = 1;
     private Uri link_avatar;
 
     private FirebaseDatabase database;
@@ -123,8 +123,6 @@ public class user_profile extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(user_profile.this, home.class);
-                startActivity(intent);
                 finish();
             }
         });
