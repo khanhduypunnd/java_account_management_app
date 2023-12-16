@@ -3,10 +3,13 @@ package com.example.mid_term_mobile;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -34,6 +37,7 @@ public class list_user extends AppCompatActivity {
     private ArrayList<User> mData = new ArrayList<>();
 
     private FirebaseDatabase database;
+    private EditText search;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,6 +56,32 @@ public class list_user extends AppCompatActivity {
         initData();
 
         back_home();
+
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                ArrayList<User> search = new ArrayList<>();
+
+                for(User user : mData){
+                    if(user.getName().toLowerCase().contains(s.toString().toLowerCase())) {
+                        search.add(user);
+                    }
+                }
+
+                User_Adapter newListUser = new User_Adapter(list_user.this, search);
+                listUsers.setAdapter(newListUser);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     private void back_home() {
@@ -102,6 +132,7 @@ public class list_user extends AppCompatActivity {
     private void initView() {
         listUsers = findViewById(R.id.listUser_recycler);
         back = findViewById(R.id.listUser_back);
+        search = findViewById(R.id.listUser_search);
     }
 
 

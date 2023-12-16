@@ -22,7 +22,7 @@
             android:layout_height="158dp"
             android:scaleType="centerCrop"
             tools:ignore="ContentDescription"
-            tools:src="@drawable/profile_img" />
+            tools:src="@drawable/avatar_student_default" />
 
     </LinearLayout>
 

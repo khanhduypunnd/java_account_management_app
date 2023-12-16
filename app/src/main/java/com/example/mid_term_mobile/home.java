@@ -61,6 +61,7 @@ public class home extends AppCompatActivity {
     private StorageReference storage_avatar;
 
     private String key;
+    private String role;
 
 
     @Override
@@ -74,7 +75,7 @@ public class home extends AppCompatActivity {
         key = intent.getStringExtra("key");
 
         name.setText(intent.getStringExtra("name"));
-        String role = intent.getStringExtra("role");
+        role = intent.getStringExtra("role");
 
 
         getAvatar(intent.getStringExtra("email"), avatar);
@@ -146,7 +147,6 @@ public class home extends AppCompatActivity {
     }
 
     private void click_event() {
-
         listUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -167,6 +167,7 @@ public class home extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(home.this, list_students_view.class);
+                intent.putExtra("role", role);
                 startActivity(intent);
             }
         });
@@ -177,7 +178,6 @@ public class home extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(home.this, student_profile.class);
                 startActivity(intent);
-
             }
         });
 
@@ -195,6 +195,7 @@ public class home extends AppCompatActivity {
             public void onClick(View v) {
                 //write_file();
                 export_file();
+                Toast.makeText(home.this, "Success", Toast.LENGTH_SHORT).show();
             }
 
 

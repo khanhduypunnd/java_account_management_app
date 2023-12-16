@@ -84,7 +84,6 @@ public class student_profile extends AppCompatActivity {
                 //locked1 = String.valueOf(locked.getText().toString());
 
 
-
                 if(name1.isEmpty()){
                     Toast.makeText(student_profile.this, "Please enter Name", LENGTH_SHORT).show();
                     st_name.requestFocus();
@@ -124,7 +123,7 @@ public class student_profile extends AppCompatActivity {
 
     private void putStudenttodatabase(){
         StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-        StorageReference avatarRef = storageRef.child("avatars/" + key);
+        StorageReference avatarRef = storageRef.child("avatars/avatar_default.png");
 
         FirebaseDatabase database1 = FirebaseDatabase.getInstance();
 
@@ -139,33 +138,25 @@ public class student_profile extends AppCompatActivity {
         age1 = st_dob.getText().toString();
 
 
-        //Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        //startActivityForResult(intent, 1);
-
         avatarRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 String url = uri.toString();
 
-
                 Student student = new Student(age1, url,class1, email1, name1, phone1);
-
-
-                //usersRef.child(key + "/avatar").setValue(url);
-
 
                 String studentID = studentsRef.push().getKey();
 
                 studentsRef.child(studentID).setValue(student);
 
 
-                avatar.clearFocus();
+                //avatar.clearFocus();
                 st_name.setText("");
                 st_email.setText("");
                 st_class.setText("");
                 st_phone.setText("");
                 st_dob.setText("");
-                avatar.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.avatar_student_default));
+                avatar.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.avatar_default));
 
 
                 Toast.makeText(student_profile.this, "Add successfully", Toast.LENGTH_SHORT).show();
@@ -209,6 +200,5 @@ public class student_profile extends AppCompatActivity {
         }, year, month, day);
         dialog.show();
     }
-
 
 }

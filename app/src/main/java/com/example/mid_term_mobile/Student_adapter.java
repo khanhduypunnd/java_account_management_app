@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,6 +28,7 @@ public class Student_adapter extends RecyclerView.Adapter<Student_adapter.ViewHo
     private Context context;
     private ArrayList<Student> data;
     private Uri link_avatar;
+    private String role;
 
 
     public Student_adapter(Context context, ArrayList<Student> students){
@@ -56,13 +58,18 @@ public class Student_adapter extends RecyclerView.Adapter<Student_adapter.ViewHo
 
 
 
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, edit_student_layout.class);
-                intent.putExtra("email", data.get(position).getEmail());
-                // Start the activity
-                context.startActivity(intent);
+                if(role.equals("employee")){
+                    Toast.makeText(context,"Your role doesn't had this function", Toast.LENGTH_SHORT).show();
+                }else{
+                    Intent intent = new Intent(context, edit_student_layout.class);
+                    intent.putExtra("email", data.get(position).getEmail());
+                    // Start the activity
+                    context.startActivity(intent);
+                }
             }
         });
 
@@ -92,6 +99,14 @@ public class Student_adapter extends RecyclerView.Adapter<Student_adapter.ViewHo
             return  data.size();
         }
         return 0;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

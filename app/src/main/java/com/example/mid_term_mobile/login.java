@@ -89,14 +89,19 @@ public class login extends AppCompatActivity {
                     for(DataSnapshot snap : snapshot.getChildren()){
                         User user = snap.getValue(User.class);
                         if(user.getPass().toString().equals(password)){
-                            Toast.makeText(login.this, "Success", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(login.this, home.class);
-                            String key = snap.getKey();
-                            intent.putExtra("key", key);
-                            intent.putExtra("email", user.getMail());
-                            intent.putExtra("name", user.getName());
-                            intent.putExtra("role", user.getRole());
-                            startActivity(intent);
+                            if(user.getStatus().toString().equals("normal")){
+                                Toast.makeText(login.this, "Success", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(login.this, home.class);
+                                String key = snap.getKey();
+                                intent.putExtra("key", key);
+                                intent.putExtra("email", user.getMail());
+                                intent.putExtra("name", user.getName());
+                                intent.putExtra("role", user.getRole());
+                                startActivity(intent);
+                            }else {
+                                Toast.makeText(login.this, "Your account was locked", Toast.LENGTH_SHORT).show();
+                            }
+
                             //startActivityForResult(intent, 100);
                         }
                         else{

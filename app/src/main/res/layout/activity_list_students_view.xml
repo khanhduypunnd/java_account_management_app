@@ -12,18 +12,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@drawable/blued_radius">
+        android:background="@drawable/blued_radius"
+        >
 
         <ImageButton
             android:id="@+id/listStudent_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:src="@drawable/back_button"/>
+            android:src="@drawable/back_button" />
 
-        <SearchView
+        <EditText
+            android:id="@+id/listStudent_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Student name"/>
+
+
+        <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"/>
+            android:layout_height="wrap_content"
+            android:src="@drawable/search_icon"
+            android:layout_gravity="center"></ImageView>
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

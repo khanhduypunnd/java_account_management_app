@@ -31,7 +31,7 @@
             android:layout_height="158dp"
             android:scaleType="centerCrop"
             tools:ignore="ContentDescription"
-            tools:src="@drawable/profile_img" />
+            tools:src="@drawable/avatar_student_default"/>
 
     </LinearLayout>
 
@@ -84,7 +84,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/st_class"
-            android:inputType="number"
+            android:inputType="text"
             android:textSize="20dp"/>
 
 

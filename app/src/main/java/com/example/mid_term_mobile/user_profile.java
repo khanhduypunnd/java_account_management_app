@@ -130,7 +130,7 @@ public class user_profile extends AppCompatActivity {
 
     private void putUsertodatabase(){
         StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-        StorageReference avatarRef = storageRef.child("avatars/" + key);
+        StorageReference avatarRef = storageRef.child("avatars/");
 
         FirebaseDatabase database1 = FirebaseDatabase.getInstance();
 

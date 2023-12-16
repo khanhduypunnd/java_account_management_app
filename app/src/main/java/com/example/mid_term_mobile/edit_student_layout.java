@@ -135,12 +135,12 @@ public class edit_student_layout extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
-                        User user = userSnapshot.getValue(User.class);
-                        if(user.getAvatar().isEmpty()){
-                            user.setAvatar("https://firebasestorage.googleapis.com/v0/b/mid-term-mobile.appspot.com/o/avatars%2Fnull?alt=media&token=c1762122-4618-429e-8f10-b8004b33aaa5");
+                        Student student = userSnapshot.getValue(Student.class);
+                        if(student.getAvatar().isEmpty()){
+                            student.setAvatar("https://firebasestorage.googleapis.com/v0/b/mid-term-mobile.appspot.com/o/avatars%2Fnull?alt=media&token=c1762122-4618-429e-8f10-b8004b33aaa5");
                         }
                         Picasso.get()
-                                .load(user.getAvatar())
+                                .load(student.getAvatar())
                                 .into(avatar);
                     }
                 }
